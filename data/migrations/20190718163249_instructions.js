@@ -6,12 +6,14 @@ exports.up = function(knex) {
       .unsigned()
       .notNullable()
       .references('id')
-      .inTable('recipe');
+      .inTable('recipe')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
     table.text('instruction').notNullable();
     table.integer('instruction_number').notNullable();
   });
 };
 
-exports.down = function (knex) {
-    return knex.schema.dropTableIfExists('instructions');
+exports.down = function(knex) {
+  return knex.schema.dropTableIfExists('instructions');
 };
